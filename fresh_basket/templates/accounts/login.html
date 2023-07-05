@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+
+{% block content %}
+    <div class="login-register-div">
+        <div class="login-register-box">
+            <h1>Login</h1>
+
+            <form method="post" action="{% url 'login' %}">
+                {{ form.username|placeholder:'Username: ' }}
+                {{ form.password|placeholder:'Password: ' }}
+                <button type="submit">Login</button>
+                {% csrf_token %}
+            </form>
+
+            {% if messages %}
+                <div class="error-messages" style="color: #ff3333; margin-top: 10px">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="second-option">
+            <p>Don't have an account? <a href="register.html">Register</a></p>
+        </div>
+    </div>
+{% endblock %}

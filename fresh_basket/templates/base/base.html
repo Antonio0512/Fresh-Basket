@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Basket</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/browser_icon.jpg' %}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'page-home' %}">
+                    <img width="50px" src="{% static 'images/1200px-The_Fresh_Market_logo.svg.png' %}" alt="img1">
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul class="nav-group">
+                    <li class="nav-item">
+                        <a href="{% url 'page-home' %}">
+                            <i>Home</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i>Catalog</i>
+                        </a>
+                    </li>
+                    {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}">
+                            <i>Login</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register' %}">
+                            <i>Register</i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'profile-details' request.user.pk %}">
+                            <i>Profile</i>
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="{% url 'logout' %}">
+                            <i>Logout</i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2023 Fresh Basket. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

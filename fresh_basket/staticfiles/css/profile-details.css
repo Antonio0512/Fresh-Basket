@@ -1,0 +1,61 @@
+.profile-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 20px;
+}
+
+.profile-info {
+    margin: 0 20px;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.promotions-section {
+    text-align: center;
+}
+
+.promotions-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.promotions-section p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.promotions-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.promotions-section li {
+    margin-bottom: 10px;
+}
+
+/* Add additional styling as needed */

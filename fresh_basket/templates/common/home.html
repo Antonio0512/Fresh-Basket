@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="welcome-section">
+        <div class="container">
+            <h1>Welcome to Fresh Basket</h1>
+            <p>Discover fresh, organic, and locally sourced products for a healthier lifestyle.</p>
+        </div>
+    </section>
+
+    <section class="image-section">
+        <div class="container">
+            <img src="{% static 'images/food_images.png' %}" alt="Fresh Products">
+        </div>
+    </section>
+{% endblock %}
