@@ -28,7 +28,7 @@ class MarketUser(AbstractUser):
     )
 
     profile_picture = models.ImageField(
-        upload_to='images',
+        upload_to='profile_pics/',
         validators=[validators.validate_file_size]
     )
 

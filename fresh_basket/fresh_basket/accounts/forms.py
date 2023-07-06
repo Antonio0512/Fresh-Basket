@@ -4,7 +4,13 @@ from django.contrib.auth import forms as auth_forms, get_user_model
 UserModel = get_user_model()
 
 
-class UserCreateForm(auth_forms.UserCreationForm):
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ['username', 'email', 'first_name', 'last_name', 'gender', 'profile_picture']
+
+
+class UserRegisterForm(auth_forms.UserCreationForm):
     class Meta:
         model = UserModel
         fields = ('username', 'email')

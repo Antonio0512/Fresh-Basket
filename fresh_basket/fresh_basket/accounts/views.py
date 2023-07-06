@@ -5,13 +5,13 @@ from django.contrib.auth import views as auth_views, login, logout, get_user_mod
 from django.contrib.auth import authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .forms import UserCreateForm, UserLoginForm
+from . import forms
 
 User = get_user_model()
 
 
 class UserRegisterView(generic_views.CreateView):
-    form_class = UserCreateForm
+    form_class = forms.UserRegisterForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('page-home')
 
@@ -27,7 +27,7 @@ class UserRegisterView(generic_views.CreateView):
 
 
 class UserLoginView(auth_views.LoginView):
-    form_class = UserLoginForm
+    form_class = forms.UserLoginForm
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
@@ -53,3 +53,27 @@ class UserDetailsView(LoginRequiredMixin, generic_views.DetailView):
     model = User
     template_name = "accounts/profile-details.html"
     context_object_name = 'user'
+
+
+class UserEditView(generic_views.UpdateView):
+    model = User
+    form_class = forms.ProfileForm
+    template_name = 'accounts/profile-edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('profile-details', kwargs={
+            'pk': self.request.user.pk
+        })
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.save()
+        form.save_m2m()
+
+        messages.success(self.request, 'Profile updated successfully.')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error updating profile.')
+        return super().form_invalid(form)

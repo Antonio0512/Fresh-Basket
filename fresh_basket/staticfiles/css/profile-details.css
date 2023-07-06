@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 .profile-picture img {
@@ -10,7 +10,7 @@
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .profile-info {
@@ -18,8 +18,13 @@
 }
 
 .profile-info h1 {
-    font-size: 24px;
+    font-size: 32px;
     margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 18px;
+    padding: 6px
 }
 
 .profile-actions {

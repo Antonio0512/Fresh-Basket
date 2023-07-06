@@ -5,7 +5,7 @@
     <div class="profile-details">
         <div class="profile-picture">
             {% if user.profile_picture %}
-                <img src="{{ user.profile_picture }}" alt="Profile Picture"/>
+                <img src="/accounts/media/{{ user.profile_picture }}" alt="Profile Picture"/>
             {% else %}
                 <img src="{% static 'images/person.png' %}" alt="Profile Picture"/>
             {% endif %}
@@ -19,7 +19,7 @@
             <!-- Add more profile information as needed -->
         </div>
         <div class="profile-actions">
-            <a href="#">
+            <a href="{% url 'profile-edit' user.pk %}">
                 <img class="edit-button" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="Edit"/>
             </a>
             <a href="#">

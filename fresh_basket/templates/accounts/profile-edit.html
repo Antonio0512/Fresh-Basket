@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+
+{% block content %}
+    <div class="edit-profile-div">
+        <div class="edit-profile-box">
+            <h1>Edit Profile</h1>
+
+            <form method="post" action="{% url 'profile-edit' request.user.pk %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.username|placeholder:'Username: ' }}
+
+                {{ form.first_name|placeholder:'First Name: ' }}
+
+                {{ form.last_name|placeholder:'Last Name: ' }}
+
+                {{ form.email|placeholder:'Email: ' }}
+
+                {{ form.gender|placeholder:'Gender: ' }}
+
+                {{ form.profile_picture|placeholder:'No profile picture' }}
+
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+        <div class="second-option">
+            <p>Back to <a href="{% url 'profile-details' request.user.pk %}">Profile</a></p>
+        </div>
+    </div>
+
+{% endblock %}
