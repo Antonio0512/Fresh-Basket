@@ -10,16 +10,58 @@
                 {% csrf_token %}
 
                 {{ form.username|placeholder:'Username: ' }}
+                {% if form.username.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 {{ form.first_name|placeholder:'First Name: ' }}
+                {% if form.first_name.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.first_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 {{ form.last_name|placeholder:'Last Name: ' }}
+                {% if form.last_name.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.last_name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 {{ form.email|placeholder:'Email: ' }}
+                {% if form.email.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 {{ form.gender|placeholder:'Gender: ' }}
+                {% if form.gender.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.gender.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 {{ form.profile_picture|placeholder:'No profile picture' }}
+                {% if form.profile_picture.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.profile_picture.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 <button type="submit">Update Profile</button>
             </form>

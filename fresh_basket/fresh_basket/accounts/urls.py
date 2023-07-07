@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('profile-details/<int:pk>/', views.UserDetailsView.as_view(), name='profile-details'),
     path('profile-edit/<int:pk>/', views.UserEditView.as_view(), name='profile-edit'),
+    path('profile-delete/<int:pk>/', views.UserDeleteView.as_view(), name='profile-delete'),
 ]
 
 if settings.DEBUG:

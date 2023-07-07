@@ -49,3 +49,11 @@
     text-align: center;
     padding: 20px;
 }
+
+.login-register-box .errorlist {
+    color: red;
+}
+
+.login-register-box .errorlist li {
+    margin-top: 5px;
+}

@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import generic as generic_views
@@ -38,7 +40,7 @@ class UserLoginView(auth_views.LoginView):
         return super().form_invalid(form)
 
 
-class UserLogoutView(generic_views.View):
+class UserLogoutView(LoginRequiredMixin, generic_views.View):
     template_name = 'accounts/logout.html'
 
     def get(self, request):
@@ -55,9 +57,9 @@ class UserDetailsView(LoginRequiredMixin, generic_views.DetailView):
     context_object_name = 'user'
 
 
-class UserEditView(generic_views.UpdateView):
+class UserEditView(LoginRequiredMixin, generic_views.UpdateView):
     model = User
-    form_class = forms.ProfileForm
+    form_class = forms.UserEditForm
     template_name = 'accounts/profile-edit.html'
 
     def get_success_url(self):
@@ -70,10 +72,33 @@ class UserEditView(generic_views.UpdateView):
         instance.user = self.request.user
         instance.save()
         form.save_m2m()
-
-        messages.success(self.request, 'Profile updated successfully.')
         return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, 'Error updating profile.')
         return super().form_invalid(form)
+
+
+class UserDeleteView(LoginRequiredMixin, generic_views.DeleteView):
+    model = User
+    template_name = 'accounts/profile-delete.html'
+    success_url = reverse_lazy('register')
+
+    def redirect_to_success_url(self):
+        return self.success_url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['user_data'] = user
+        return context
+
+    def form_valid(self, form):
+        obj = self.get_object()
+        profile_photo_path = obj.profile_picture.path
+        obj.delete()
+
+        if profile_photo_path and os.path.isfile(profile_photo_path):
+            os.remove(profile_photo_path)
+
+        return super().form_valid(form)

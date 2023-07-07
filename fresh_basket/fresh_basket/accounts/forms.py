@@ -4,10 +4,19 @@ from django.contrib.auth import forms as auth_forms, get_user_model
 UserModel = get_user_model()
 
 
-class ProfileForm(forms.ModelForm):
+class UserEditForm(forms.ModelForm):
     class Meta:
         model = UserModel
         fields = ['username', 'email', 'first_name', 'last_name', 'gender', 'profile_picture']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].required = False
+        self.fields['first_name'].required = False
+        self.fields['last_name'].required = False
+        self.fields['email'].required = False
+        self.fields['gender'].required = False
+        self.fields['profile_picture'].required = False
 
 
 class UserRegisterForm(auth_forms.UserCreationForm):
@@ -29,3 +38,9 @@ class UserLoginForm(auth_forms.AuthenticationForm):
     error_messages = {
         'invalid_login': 'Invalid username or password. Please try again.',
     }
+
+
+class UserDeleteForm(forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = '__all__'

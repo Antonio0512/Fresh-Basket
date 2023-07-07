@@ -22,7 +22,7 @@
             <a href="{% url 'profile-edit' user.pk %}">
                 <img class="edit-button" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="Edit"/>
             </a>
-            <a href="#">
+            <a href="{% url 'profile-delete' user.pk %}">
                 <img class="delete-button" src="{% static 'images/icon-remove-22.jpg' %}" alt="Delete"/>
             </a>
         </div>

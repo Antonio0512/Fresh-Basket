@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+
+{% block content %}
+    <div class="delete-profile-div">
+        <div class="delete-profile-box">
+            <h1>Delete Profile</h1>
+
+            <form method="post" action="{% url 'profile-delete' request.user.pk %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+                <label>
+                    <input type="text" name="username" value="{{ user_data.username }}" placeholder="Username: "
+                           readonly>
+                </label>
+                <label>
+                    <input type="text" name="first_name" value="{{ user_data.first_name }}" placeholder="First Name: "
+                           readonly>
+                </label>
+                <label>
+                    <input type="text" name="last_name" value="{{ user_data.last_name }}" placeholder="Last Name: "
+                           readonly>
+                </label>
+                <label>
+                    <input type="text" name="email" value="{{ user_data.email }}" placeholder="Email: " readonly>
+                </label>
+                <label>
+                    <input type="text" name="gender" value="{{ user_data.gender }}" placeholder="Gender: " readonly>
+                </label>
+                <label>
+                    <input type="text" name="profile_picture" value="{{ user_data.profile_picture }}"
+                           placeholder="No profile picture" readonly>
+                </label>
+
+                <button type="submit">Delete Profile</button>
+            </form>
+        </div>
+        <div class="second-option">
+            <p>Back to <a href="{% url 'profile-details' request.user.pk %}">Profile</a></p>
+        </div>
+    </div>
+
+{% endblock %}
