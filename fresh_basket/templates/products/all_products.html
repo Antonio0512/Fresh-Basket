@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="product-card">
+        <h2>Discount Products</h2>
+        <div class="product-container">
+            {% for product in products %}
+                <div class="product-item">
+                    <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+                    <div class="product-details">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="price-container">
+                        <span class="new-price">{{ product.price }} BGN</span>
+                        {% if product.old_price %}
+                            <span class="old-price">{{ product.old_price }} BGN</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p>No products found.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

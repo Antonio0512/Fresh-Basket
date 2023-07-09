@@ -5,7 +5,7 @@
     <div class="profile-details">
         <div class="profile-picture">
             {% if user.profile_picture %}
-                <img src="/accounts/media/{{ user.profile_picture }}" alt="Profile Picture"/>
+                <img src="/media/{{ user.profile_picture }}" alt="Profile Picture"/>
             {% else %}
                 <img src="{% static 'images/person.png' %}" alt="Profile Picture"/>
             {% endif %}
