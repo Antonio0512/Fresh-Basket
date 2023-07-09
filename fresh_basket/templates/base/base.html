@@ -26,32 +26,37 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{% url 'shopping-cart' %}">
+                            <i>Cart</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{% url 'catalog' %}">
                             <i>Catalog</i>
                         </a>
                     </li>
                     {% if not request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a href="{% url 'login' %}">
-                            <i>Login</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'register' %}">
-                            <i>Register</i>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}">
+                                <i>Login</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'register' %}">
+                                <i>Register</i>
+                            </a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'profile-details' request.user.pk %}">
-                            <i>Profile</i>
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a href="{% url 'logout' %}">
-                            <i>Logout</i>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="{% url 'profile-details' request.user.pk %}">
+                                <i>Profile</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'logout' %}">
+                                <i>Logout</i>
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

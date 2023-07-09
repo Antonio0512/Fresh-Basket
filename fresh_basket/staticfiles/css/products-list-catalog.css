@@ -32,6 +32,11 @@
     transform: scale(1.03);
 }
 
+.product-item .product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .product-item img {
     width: 200px;
     height: 200px;

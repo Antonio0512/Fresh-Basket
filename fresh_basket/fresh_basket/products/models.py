@@ -10,8 +10,7 @@ class Product(models.Model):
                             blank=False,
                             validators=[validators.validate_name_length]
                             )
-    description = models.TextField(max_length=300,
-                                   null=False,
+    description = models.TextField(null=False,
                                    blank=False
                                    )
     price = models.DecimalField(max_digits=8,

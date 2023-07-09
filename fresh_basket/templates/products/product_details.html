@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="detail-product-card">
+        <h2>{{ product.name }}</h2>
+        <div class="detail-product-details">
+            <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+            <p class="detail-description">{{ product.description }}</p>
+            <div class="detail-price-container">
+                <p><span>Price:</span> {{ product.price }} BGN</p>
+                {% if product.old_price %}
+                    <p class="detail-old-price"><span>Old Price:</span> {{ product.old_price }} BGN</p>
+                {% endif %}
+            </div>
+            <form action="{% url 'add-to-cart' product.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                <label>
+                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+                </label>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

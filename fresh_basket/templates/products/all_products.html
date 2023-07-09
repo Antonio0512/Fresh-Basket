@@ -6,17 +6,19 @@
         <div class="product-container">
             {% for product in products %}
                 <div class="product-item">
-                    <img src="/media/{{ product.image }}" alt="{{ product.name }}">
-                    <div class="product-details">
-                        <h3>{{ product.name }}</h3>
-                        <p>{{ product.description }}</p>
-                    </div>
-                    <div class="price-container">
-                        <span class="new-price">{{ product.price }} BGN</span>
-                        {% if product.old_price %}
-                            <span class="old-price">{{ product.old_price }} BGN</span>
-                        {% endif %}
-                    </div>
+                    <a href="{% url 'product-details' product.pk %}" class="product-link">
+                        <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+                        <div class="product-details">
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                        </div>
+                        <div class="price-container">
+                            <span class="new-price">{{ product.price }} BGN</span>
+                            {% if product.old_price %}
+                                <span class="old-price">{{ product.old_price }} BGN</span>
+                            {% endif %}
+                        </div>
+                    </a>
                 </div>
             {% empty %}
                 <p>No products found.</p>

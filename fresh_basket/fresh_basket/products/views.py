@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Product
 
 
@@ -19,3 +19,9 @@ class DiscountProductsListView(ListView):
         # Filter the products to display only the ones with discounts
         queryset = queryset.filter(discount_catalog__isnull=False)
         return queryset
+
+
+class ProductDetailsView(DetailView):
+    model = Product
+    template_name = 'products/product_details.html'
+    context_object_name = 'product'

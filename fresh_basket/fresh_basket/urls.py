@@ -8,7 +8,8 @@ urlpatterns = [
     path('', include('fresh_basket.common.urls')),
     path('accounts/', include('fresh_basket.accounts.urls')),
     path('products/', include('fresh_basket.products.urls')),
-    path('catalog/', include('fresh_basket.catalog.urls'))
+    path('catalog/', include('fresh_basket.catalog.urls')),
+    path('shopping-cart/', include('fresh_basket.shopping_cart.urls'))
 ]
 
 if settings.DEBUG:

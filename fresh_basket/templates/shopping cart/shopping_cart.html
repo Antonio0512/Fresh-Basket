@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <div class="cart-container">
+        <h2 class="cart-title-h2">Your Cart</h2>
+        {% if cart_items %}
+            <table class="cart-table">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }}BGN</td>
+                        <td>{{ item.subtotal }}BGN</td>
+                        <td>
+                            <form action="{% url 'delete-from-cart' item.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="cart-delete-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Total: <span>{{ cart_total }}BGN</span></td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        <div class="cart-button-container">
+            <button class="cart-checkout-button">Proceed to Checkout</button>
+        </div>
+        {% else %}
+            <p class="cart-empty">Your cart is empty.</p>
+        {% endif %}
+    </div>
+{% endblock %}
