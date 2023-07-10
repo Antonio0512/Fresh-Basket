@@ -73,3 +73,9 @@
 .add-to-cart-button:hover {
     background-color: #444;
 }
+
+.detail-quantity-input {
+    width: 35px;
+    padding: 4px;
+    text-align: center;
+}

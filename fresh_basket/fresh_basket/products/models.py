@@ -25,6 +25,9 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_pics/',
                               validators=[validators.validate_file_size]
                               )
+
+    has_weight = models.BooleanField(default=False)
+
     catalog = models.ForeignKey(Catalog,
                                 on_delete=models.CASCADE,
                                 null=True, blank=True,

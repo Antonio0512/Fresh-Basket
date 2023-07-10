@@ -15,11 +15,18 @@
             <form action="{% url 'add-to-cart' product.pk %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="add-to-cart-button">Add to Cart</button>
-                <label>
-                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-                </label>
+                {% if product.has_weight %}
+                    <label>
+                        Weight (kg):
+                        <input type="number" name="weight" step="0.01" min="0" class="detail-quantity-input" required>
+                    </label>
+                {% else %}
+                    <label>
+                        Qty:
+                        <input type="number" name="quantity" value="1" min="1" class="detail-quantity-input" required>
+                    </label>
+                {% endif %}
             </form>
-
         </div>
     </div>
 {% endblock %}

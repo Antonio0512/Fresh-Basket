@@ -1,3 +1,4 @@
+import decimal
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, View
@@ -24,6 +25,7 @@ class AddToCartView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         product = get_object_or_404(Product, pk=product_id)
         quantity = int(request.POST.get('quantity', 1))
+        weight = decimal.Decimal(request.POST.get('weight', 0.0))
 
         try:
             cart_item = CartItem.objects.get(user=request.user, product=product)
@@ -32,6 +34,12 @@ class AddToCartView(LoginRequiredMixin, View):
         except CartItem.DoesNotExist:
             cart_item = CartItem.objects.create(user=request.user, product=product, quantity=quantity)
             cart_item.save()
+
+        if cart_item.weight is None:
+            cart_item.weight = weight
+        else:
+            cart_item.weight += weight
+        cart_item.save()
 
         return redirect('product-details', product.pk)
 

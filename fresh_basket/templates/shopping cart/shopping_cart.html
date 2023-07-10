@@ -18,7 +18,11 @@
                 {% for item in cart_items %}
                     <tr>
                         <td>{{ item.product.name }}</td>
-                        <td>{{ item.quantity }}</td>
+                        {% if item.has_weight %}
+                            <td>{{ item.weight }}kg</td>
+                        {% else %}
+                            <td>{{ item.quantity }}</td>
+                        {% endif %}
                         <td>{{ item.product.price }}BGN</td>
                         <td>{{ item.subtotal }}BGN</td>
                         <td>
@@ -38,9 +42,9 @@
                 </tr>
                 </tfoot>
             </table>
-        <div class="cart-button-container">
-            <button class="cart-checkout-button">Proceed to Checkout</button>
-        </div>
+            <div class="cart-button-container">
+                <button class="cart-checkout-button">Proceed to Checkout</button>
+            </div>
         {% else %}
             <p class="cart-empty">Your cart is empty.</p>
         {% endif %}
