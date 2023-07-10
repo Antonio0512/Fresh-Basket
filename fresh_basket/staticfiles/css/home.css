@@ -54,33 +54,73 @@ header {
 }
 
 
-.welcome-section {
+.home-welcome-section {
     text-align: center;
-    margin: 50px 0;
+    margin-top: 25px;
 }
 
-.welcome-section h1 {
-    font-size: 48px;
+.home-welcome-section h1 {
+    font-size: 40px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
-.welcome-section p {
-    font-size: 30px;
+.home-welcome-section p {
+    font-size: 25px;
     color: #666;
 }
 
-.image-section {
+.home-image-section {
     text-align: center;
-    margin: 50px 0;
+    margin: 20px 0;
 }
 
-.image-section img {
-    height: 27em;
-    width: 70em;
+.home-image-section img {
+    height: 20em;
+    width: 60em;
     display: block;
     margin: 0 auto;
+}
+
+.home-promotions-section {
+    max-width: 60%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.home-promotions-title {
+    font-size: 30px;
+    /*margin-bottom: 10px;*/
+    text-align: center;
+}
+
+.home-promotions-description {
+    color: #777;
+    font-size: 20px;
+    text-align: center;
+}
+
+.home-promotions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.home-promotion-item {
+    margin-top: 20px;
+}
+
+.home-promotion-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.home-promotion-description {
+    font-size: 15px;
+    color: #777;
 }
 
 /* Footer Styles */

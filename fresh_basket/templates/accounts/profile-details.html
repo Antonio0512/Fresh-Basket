@@ -29,12 +29,15 @@
     </div>
 
     <div class="promotions-section">
-        <h2>Promotions/Offers</h2>
-        <p>Check out our latest promotions, discounts, and exclusive offers:</p>
-        <ul>
-            <li>Offer 1: Save 20% on fresh fruits and vegetables.</li>
-            <li>Offer 2: Buy 2, Get 1 Free on selected pantry items.</li>
-            <li>Offer 3: Free shipping on orders over $50.</li>
+        <h2 class="promotions-title">Promotions/Offers</h2>
+        <p class="promotions-description">Check out our latest promotions, discounts, and exclusive offers:</p>
+        <ul class="promotions-list">
+            {% for promotion in promotions %}
+                <li class="promotion-item">
+                    <h3 class="promotion-title">{{ promotion.title }}</h3>
+                    <p class="promotion-description">{{ promotion.description }}</p>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}

@@ -7,7 +7,9 @@ from django.contrib.auth import views as auth_views, login, logout, get_user_mod
 from django.contrib.auth import authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
+
 from . import forms
+from ..promotions.models import Promotions
 
 User = get_user_model()
 
@@ -55,6 +57,11 @@ class UserDetailsView(LoginRequiredMixin, generic_views.DetailView):
     model = User
     template_name = "accounts/profile-details.html"
     context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['promotions'] = Promotions.objects.all()
+        return context
 
 
 class UserEditView(LoginRequiredMixin, generic_views.UpdateView):

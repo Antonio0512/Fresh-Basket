@@ -2,16 +2,29 @@
 {% load static %}
 
 {% block content %}
-    <section class="welcome-section">
-        <div class="container">
+    <section class="home-welcome-section">
+        <div class="home-container">
             <h1>Welcome to Fresh Basket</h1>
             <p>Discover fresh, organic, and locally sourced products for a healthier lifestyle.</p>
         </div>
     </section>
 
-    <section class="image-section">
-        <div class="container">
+    <section class="home-image-section">
+        <div class="home-container">
             <img src="{% static 'images/food_images.png' %}" alt="Fresh Products">
         </div>
     </section>
+
+    <div class="home-promotions-section">
+        <h2 class="home-promotions-title">Promotions/Offers</h2>
+        <p class="home-promotions-description">Check out our latest promotions, discounts, and exclusive offers:</p>
+        <ul class="home-promotions-list">
+            {% for promotion in promotions %}
+                <li class="home-promotion-item">
+                    <h3 class="home-promotion-title">{{ promotion.title }}</h3>
+                    <p class="home-promotion-description">{{ promotion.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
