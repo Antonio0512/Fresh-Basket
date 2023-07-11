@@ -17,7 +17,7 @@ class ShoppingCartView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_total'] = sum(item.subtotal() for item in CartItem.objects.all())
+        context['cart_total'] = sum(item.subtotal() for item in CartItem.objects.filter(user=self.request.user))
         return context
 
 
@@ -41,7 +41,9 @@ class AddToCartView(LoginRequiredMixin, View):
             cart_item.weight += weight
         cart_item.save()
 
-        return redirect('product-details', product.pk)
+        referring_url = request.META.get('HTTP_REFERER')
+
+        return redirect(referring_url)
 
 
 class DeleteFromCartView(LoginRequiredMixin, View):

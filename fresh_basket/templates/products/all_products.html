@@ -6,7 +6,7 @@
         <div class="catalog-product-container">
             {% for product in products %}
                 <div class="catalog-product-item">
-                    <a href="{% url 'product-details' product.pk %}" class="catalog-product-link">
+                    <a href="{% url 'all-product-details' product.pk %}" class="catalog-product-link">
                         <img src="/media/{{ product.image }}" alt="{{ product.name }}">
                         <div class="catalog-product-details">
                             <h3>{{ product.name }}</h3>

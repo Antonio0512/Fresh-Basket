@@ -5,6 +5,7 @@ from . import validators
 
 
 class MarketUser(AbstractUser):
+
     username = models.CharField(
         unique=True,
         max_length=30,

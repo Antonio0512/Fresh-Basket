@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h2 class="favourites-title-h2">Your favourite Products</h2>
+    <ul class="favourites-list">
+        {% for favourite in favourites %}
+            <li class="favourite-item">
+                <a class="favourite-link" href="{% url 'favourite-products-details' favourite.product.pk %}">
+                    <div class="favourite-thumbnail">
+                        <img src="{{ favourite.product.image.url }}" alt="{{ favourite.product.name }}">
+
+                    </div>
+                    <div class="favourite-details">
+                        <h3 class="favourite-name">{{ favourite.product.name }}</h3>
+                        <p class="favourite-description">{{ favourite.product.description }}</p>
+                        <p class="favourite-price">{{ favourite.product.price }} BGN</p>
+                        {% if favourite.product.old_price %}
+                            <p class="favourite-old-price">{{ favourite.product.old_price }} BGN</p>
+                        {% endif %}
+                    </div>
+                </a>
+                <form action="{% url 'remove-from-favourites' favourite.pk %}" method="POST"
+                      class="favourite-remove-form">
+                    {% csrf_token %}
+                    <button type="submit" class="favourite-remove-button">Remove from Favorites</button>
+                </form>
+            </li>
+        {% empty %}
+            <li class="no-favourites">No favourite products found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

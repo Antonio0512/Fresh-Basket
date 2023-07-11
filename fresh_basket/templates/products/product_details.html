@@ -14,7 +14,7 @@
             </div>
             <form action="{% url 'add-to-cart' product.pk %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                <button type="submit" class="detail-add-to-cart-button">Add to Cart</button>
                 {% if product.has_weight %}
                     <label>
                         Weight (kg):
@@ -27,6 +27,18 @@
                     </label>
                 {% endif %}
             </form>
+
+            <form action="{% url 'add-to-favourites' product.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="detail-add-to-favorites-button">Add to Favorites</button>
+            </form>
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <p class="detail-error-message">{{ message }}</p>
+                {% elif message.tags == 'success' %}
+                    <p class="detail-success-message">{{ message }}</p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

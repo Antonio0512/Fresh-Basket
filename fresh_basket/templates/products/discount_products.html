@@ -1,21 +1,21 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    <div class="product-card">
+    <div class="catalog-product-card">
         <h2>Discount Products</h2>
-        <div class="product-container">
+        <div class="catalog-product-container">
             {% for product in products %}
-                <div class="product-item">
-                    <a href="{% url 'product-details' product.pk %}" class="product-link">
+                <div class="catalog-product-item">
+                    <a href="{% url 'discount-product-details' product.pk %}" class="catalog-product-link">
                         <img src="/media/{{ product.image }}" alt="{{ product.name }}">
-                        <div class="product-details">
+                        <div class="catalog-product-details">
                             <h3>{{ product.name }}</h3>
                             <p>{{ product.description }}</p>
                         </div>
-                        <div class="price-container">
-                            <span class="new-price">{{ product.price }} BGN</span>
+                        <div class="catalog-price-container">
+                            <span class="catalog-new-price">{{ product.price }} BGN</span>
                             {% if product.old_price %}
-                                <span class="old-price">{{ product.old_price }} BGN</span>
+                                <span class="catalog-old-price">{{ product.old_price }} BGN</span>
                             {% endif %}
                         </div>
                     </a>

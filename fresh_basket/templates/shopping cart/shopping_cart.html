@@ -17,7 +17,12 @@
                 <tbody>
                 {% for item in cart_items %}
                     <tr>
-                        <td>{{ item.product.name }}</td>
+                        <td class="cart-product-cell">
+                            <a class="cart-link" href="{% url 'cart-details' item.product.pk %}">
+                                <img src="/media/{{ item.product.image }}" alt="{{ item.product.name }} Image">
+                                <span>{{ item.product.name }}</span>
+                            </a>
+                        </td>
                         {% if item.has_weight %}
                             <td>{{ item.weight }}kg</td>
                         {% else %}

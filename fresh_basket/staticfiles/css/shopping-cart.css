@@ -26,9 +26,24 @@
     font-weight: bold;
 }
 
-/*.cart-table td:last-child {*/
-/*    text-align: right;*/
-/*}*/
+.cart-product-cell .cart-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+.cart-product-cell .cart-link:hover {
+    transform: scale(1.03);
+}
+
+.cart-product-cell img {
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
+}
 
 .cart-table tfoot td {
     font-weight: bold;
