@@ -4,7 +4,7 @@
     <div class="detail-product-card">
         <h2>{{ product.name }}</h2>
         <div class="detail-product-details">
-            <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
             <p class="detail-description">{{ product.description }}</p>
             <div class="detail-price-container">
                 <p><span>Price:</span> {{ product.price }} BGN</p>
@@ -27,18 +27,24 @@
                     </label>
                 {% endif %}
             </form>
+            <div class="detail-favorite-reviews-btns">
+                <form action="{% url 'add-to-favourites' product.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="detail-add-to-favorites-button">Add to Favorites</button>
+                </form>
+                <a href="{% url 'product-reviews' product.pk %}" class="detail-read-reviews-button">Read Reviews</a>
+            </div>
+            <div class="detail-messages-container">
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <p class="detail-error-message">{{ message }}</p>
+                    {% elif message.tags == 'success' %}
+                        <p class="detail-success-message">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-            <form action="{% url 'add-to-favourites' product.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="detail-add-to-favorites-button">Add to Favorites</button>
-            </form>
-            {% for message in messages %}
-                {% if message.tags == 'error' %}
-                    <p class="detail-error-message">{{ message }}</p>
-                {% elif message.tags == 'success' %}
-                    <p class="detail-success-message">{{ message }}</p>
-                {% endif %}
-            {% endfor %}
+
         </div>
     </div>
 {% endblock %}

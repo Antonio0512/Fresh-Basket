@@ -91,3 +91,7 @@
 .favourite-remove-button:hover {
     background-color: #c0392b;
 }
+
+.no-favourites {
+    text-align: center;
+}
