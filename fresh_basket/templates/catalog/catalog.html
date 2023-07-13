@@ -1,42 +1,50 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    <div class="catalog-card">
-        <h2>All Products Catalog</h2>
-        <ul>
-            <li>
-                <a href="{% url 'products-all' %}" class="catalog-link">
-                    <div class="catalog-item">
-                        <div class="catalog-img">
-                            <img src="/media/{{ all_catalogs.catalog_image }}" alt="{{ all_catalogs.name }}">
+    {% if all_catalogs %}
+        <div class="catalog-card">
+            <h2>All Products Catalog</h2>
+            <ul>
+                <li>
+                    <a href="{% url 'products-all' %}" class="catalog-link">
+                        <div class="catalog-item">
+                            <div class="catalog-img">
+                                <img src="/media/{{ all_catalogs.catalog_image }}" alt="{{ all_catalogs.name }}">
+                            </div>
+                            <div class="catalog-details">
+                                <h3>{{ all_catalogs.name }}</h3>
+                                <p>{{ all_catalogs.description }}</p>
+                            </div>
                         </div>
-                        <div class="catalog-details">
-                            <h3>{{ all_catalogs.name }}</h3>
-                            <p>{{ all_catalogs.description }}</p>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <p>No catalogs are available at the moment.</p>
+    {% endif %}
 
-    <div class="catalog-card">
-        <h2>Discounts Catalog</h2>
-        <ul>
-            <li>
-                <a href="{% url 'products-discount' %}" class="catalog-link">
-                    <div class="catalog-item">
-                        <div class="catalog-img">
-                            <img src="/media/{{ discounted_catalogs.catalog_image }}"
-                                 alt="{{ discounted_catalogs.name }}">
+    {% if discounted_catalogs %}
+        <div class="catalog-card">
+            <h2>Discounts Catalog</h2>
+            <ul>
+                <li>
+                    <a href="{% url 'products-discount' %}" class="catalog-link">
+                        <div class="catalog-item">
+                            <div class="catalog-img">
+                                <img src="/media/{{ discounted_catalogs.catalog_image }}"
+                                     alt="{{ discounted_catalogs.name }}">
+                            </div>
+                            <div class="catalog-details">
+                                <h3>{{ discounted_catalogs.name }}</h3>
+                                <p>{{ discounted_catalogs.description }}</p>
+                            </div>
                         </div>
-                        <div class="catalog-details">
-                            <h3>{{ discounted_catalogs.name }}</h3>
-                            <p>{{ discounted_catalogs.description }}</p>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <p>No discounted catalogs are available at the moment.</p>
+    {% endif %}
 {% endblock %}

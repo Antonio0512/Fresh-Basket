@@ -1,0 +1,84 @@
+.profile-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.profile-picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 30px;
+}
+
+.profile-info {
+    margin: 0 20px;
+}
+
+.profile-info h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 18px;
+    padding: 6px
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.promotions-section {
+    max-width: 60%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.promotions-title {
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.promotions-description {
+    color: #777;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.promotions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.promotion-item {
+    margin-top: 35px;
+    margin-left: 30px;
+}
+
+.promotion-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.promotion-description {
+    font-size: 16px;
+    color: #777;
+}
+

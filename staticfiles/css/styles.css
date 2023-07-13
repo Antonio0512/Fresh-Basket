@@ -1,0 +1,12 @@
+@import 'home.css';
+@import "register.css";
+@import "logout.css";
+@import "profile-details.css";
+@import "profile-edit.css";
+@import "profile-delete.css";
+@import "catalog.css";
+@import "products-list-catalog.css";
+@import "product-details.css";
+@import "shopping-cart.css";
+@import "favourites-list.css";
+@import "reviews-list.css";

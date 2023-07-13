@@ -1,0 +1,97 @@
+.favourites-title-h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 30px 0;
+}
+
+.favourites-list {
+    max-width: 75%;
+    list-style: none;
+    margin: 0 auto;
+}
+
+.favourite-item {
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid #888888;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.favourite-item:hover {
+    transform: scale(1.03);
+}
+
+.favourite-link {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.favourite-thumbnail {
+    width: 120px;
+    height: 120px;
+    margin-right: 15px;
+}
+
+.favourite-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favourite-details {
+    flex: 1;
+}
+
+.favourite-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.favourite-description {
+    color: #777;
+    margin-bottom: 10px;
+    overflow: hidden;
+    max-height: 100px;
+}
+
+.favourite-price, .favourite-old-price {
+    display: inline-block;
+}
+
+.favourite-price {
+    font-weight: bold;
+}
+
+.favourite-old-price {
+    text-decoration: line-through;
+    color: red;
+    margin-left: 8px;
+}
+
+.favourite-remove-form {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.favourite-remove-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.favourite-remove-button:hover {
+    background-color: #c0392b;
+}
+
+.no-favourites {
+    text-align: center;
+}
