@@ -21,7 +21,7 @@
             </ul>
         </div>
     {% else %}
-        <p>No catalogs are available at the moment.</p>
+        <p class="catalog-no-catalog">No catalogs are available at the moment.</p>
     {% endif %}
 
     {% if discounted_catalogs %}
@@ -44,7 +44,5 @@
                 </li>
             </ul>
         </div>
-    {% else %}
-        <p>No discounted catalogs are available at the moment.</p>
     {% endif %}
 {% endblock %}

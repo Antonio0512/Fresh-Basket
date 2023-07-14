@@ -73,10 +73,13 @@
     color: blue;
 }
 
-.edit-profile-box .errorlist {
+.edit-profile-box .edit-errorlist {
     color: red;
+    list-style: none;
 }
 
 .edit-profile-box .errorlist li {
     margin-bottom: 7px;
 }
+
+

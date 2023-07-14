@@ -96,13 +96,17 @@ class UserDeleteView(LoginRequiredMixin, generic_views.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.get_object()
-        context['user_data'] = user
+        context['user_data'] = self.get_object()
         return context
 
     def form_valid(self, form):
         obj = self.get_object()
-        profile_photo_path = obj.profile_picture.path
+        profile_photo_path = None
+
+        if obj.profile_picture and obj.profile_picture.path:
+            profile_photo_path = obj.profile_picture.path
+            obj.profile_picture.delete()
+
         obj.delete()
 
         if profile_photo_path and os.path.isfile(profile_photo_path):

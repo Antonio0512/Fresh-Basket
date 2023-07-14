@@ -18,11 +18,23 @@ class UserEditForm(forms.ModelForm):
         self.fields['gender'].required = False
         self.fields['profile_picture'].required = False
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if not username:
+            raise forms.ValidationError("Username is required.")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise forms.ValidationError("Email is required.")
+        return email
+
 
 class UserRegisterForm(auth_forms.UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'password1', 'password2')
         field_classes = {
             'username': auth_forms.UsernameField,
         }
