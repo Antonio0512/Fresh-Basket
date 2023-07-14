@@ -16,7 +16,6 @@ class DiscountProductsListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # Filter the products to display only the ones with discounts
         queryset = queryset.filter(discount_catalog__isnull=False)
         return queryset
 

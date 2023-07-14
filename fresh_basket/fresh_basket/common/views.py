@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DeleteView
 
@@ -29,9 +29,7 @@ class AddToFavoritesView(LoginRequiredMixin, View):
             models.Favourite.objects.create(user=request.user, product=product)
             messages.success(request, 'Product added to favorites successfully.')
 
-        referring_url = request.META.get('HTTP_REFERER')
-
-        return redirect(referring_url)
+        return redirect(request.META.get('HTTP_REFERER', reverse('page-home')))
 
 
 class FavoriteListView(LoginRequiredMixin, ListView):
@@ -82,5 +80,4 @@ class AddReviewToProduct(LoginRequiredMixin, View):
                 rating=review_rating
             )
 
-        referring_url = request.META.get('HTTP_REFERER')
-        return redirect(referring_url)
+        return redirect(request.META.get('HTTP_REFERER', reverse('page-home')))

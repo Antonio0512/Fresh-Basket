@@ -1,7 +1,8 @@
 import decimal
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, View
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, View, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CartItem
 from ..products.models import Product
@@ -22,8 +23,8 @@ class ShoppingCartView(LoginRequiredMixin, ListView):
 
 
 class AddToCartView(LoginRequiredMixin, View):
-    def post(self, request, product_id):
-        product = get_object_or_404(Product, pk=product_id)
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
         quantity = int(request.POST.get('quantity', 1))
         weight = decimal.Decimal(request.POST.get('weight', 0.0))
 
@@ -41,17 +42,13 @@ class AddToCartView(LoginRequiredMixin, View):
             cart_item.weight += weight
         cart_item.save()
 
-        referring_url = request.META.get('HTTP_REFERER')
-
-        return redirect(referring_url)
+        return redirect(request.META.get('HTTP_REFERER', reverse('page-home')))
 
 
-class DeleteFromCartView(LoginRequiredMixin, View):
-    def post(self, request, product_id):
-        item = CartItem.objects.filter(user=request.user, pk=product_id).first()
-        if item:
-            item.delete()
-            messages.success(request, "Item successfully removed from the cart.")
-        else:
-            messages.error(request, "Failed to delete item from the cart.")
-        return redirect('shopping-cart')
+class DeleteFromCartView(LoginRequiredMixin, DeleteView):
+    model = CartItem
+    success_url = reverse_lazy('shopping-cart')
+
+    def form_valid(self, form):
+        messages.success(self.request, "Item successfully removed from the cart.")
+        return super().form_valid(form)
