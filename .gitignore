@@ -159,3 +159,5 @@ postgresql
 docker-compose.prod.yml
 
 mediafiles
+
+all_staticfiles

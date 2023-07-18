@@ -5,18 +5,12 @@ RUN apt update -y && apt upgrade -y
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-ENV APP_HOME=/home/app/web
-
-#ENV STATICFILES_HOME=/tmp/staticfiles
-
-#RUN mkdir -p $STATICFILES_HOME
-
-WORKDIR $APP_HOME
+WORKDIR /app
 
 RUN pip install --upgrade pip
 
-COPY ./requirements.txt .
+COPY ./requirements.txt /app/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . /app/
