@@ -42,9 +42,15 @@
     overflow: hidden;
 }
 
-.catalog-img img {
+.catalog-img .catalog-with-image {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+}
+
+.catalog-img .catalog-no-image {
+    width: 50%;
+    height: 70%;
     object-fit: cover;
 }
 

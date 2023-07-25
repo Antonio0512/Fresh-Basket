@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'fresh_basket.products',
     'fresh_basket.catalog',
     'fresh_basket.shopping_cart',
-    'fresh_basket.promotions'
+    'fresh_basket.promotions',
+    'fresh_basket.payment'
 ]
 
 MIDDLEWARE = [

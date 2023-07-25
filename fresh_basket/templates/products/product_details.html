@@ -12,19 +12,15 @@
                     <p class="detail-old-price"><span>Old Price:</span> {{ product.old_price }} BGN</p>
                 {% endif %}
             </div>
-            <form action="{% url 'add-to-cart' product.pk %}" method="POST">
+            <form method="post" action="{% url 'add-to-cart' product.pk %}">
                 {% csrf_token %}
                 <button type="submit" class="detail-add-to-cart-button">Add to Cart</button>
                 {% if product.has_weight %}
-                    <label>
-                        Weight (kg):
-                        <input type="number" name="weight" step="0.01" min="0" class="detail-quantity-input" required>
-                    </label>
+                    {{ form.weight.label_tag }}
+                    {{ form.weight }}
                 {% else %}
-                    <label>
-                        Qty:
-                        <input type="number" name="quantity" value="1" min="1" class="detail-quantity-input" required>
-                    </label>
+                    {{ form.quantity.label_tag }}
+                    {{ form.quantity }}
                 {% endif %}
             </form>
             <div class="detail-favorite-reviews-btns">
@@ -43,8 +39,6 @@
                     {% endif %}
                 {% endfor %}
             </div>
-
-
         </div>
     </div>
 {% endblock %}

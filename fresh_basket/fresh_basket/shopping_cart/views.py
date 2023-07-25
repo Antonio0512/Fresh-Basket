@@ -28,21 +28,14 @@ class AddToCartView(LoginRequiredMixin, View):
         quantity = int(request.POST.get('quantity', 1))
         weight = decimal.Decimal(request.POST.get('weight', 0.0))
 
-        try:
-            cart_item = CartItem.objects.get(user=request.user, product=product)
-            cart_item.quantity += quantity
-            cart_item.save()
-        except CartItem.DoesNotExist:
-            cart_item = CartItem.objects.create(user=request.user, product=product, quantity=quantity)
-            cart_item.save()
+        cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
+                                                            defaults={'quantity': quantity})
 
-        if cart_item.weight is None:
-            cart_item.weight = weight
-        else:
-            cart_item.weight += weight
+        cart_item.quantity += quantity
+        cart_item.weight = weight if cart_item.weight is None else cart_item.weight + weight
         cart_item.save()
 
-        return redirect(request.META.get('HTTP_REFERER', reverse('page-home')))
+        return redirect(reverse('all-product-details', kwargs={'pk': pk}))
 
 
 class DeleteFromCartView(LoginRequiredMixin, DeleteView):
