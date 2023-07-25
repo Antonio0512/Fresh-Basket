@@ -27,6 +27,16 @@
                 <form method="post" action="{% url 'product-reviews-add' product_pk %}">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <div class="review-messages">
+                        {% if messages %}
+                            <ul class="review-messages">
+                                {% for message in messages %}
+                                    <li class="review-messages-li" {% if message.tags %}
+                                        class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
                     <button class="review-submit-button" type="submit">Submit Review</button>
                 </form>
             </div>

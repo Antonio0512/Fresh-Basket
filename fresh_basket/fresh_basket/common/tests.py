@@ -57,8 +57,8 @@ class CommonAppTests(TestCase):
         self.client.force_login(self.user)
         url = reverse('product-reviews-add', kwargs={'pk': self.product.pk})
         data = {
-            'review-content': 'Test review content',
-            'review-rating': '4.5'
+            'content': 'Test review content',
+            'rating': 4.5,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)

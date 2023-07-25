@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DeleteView, FormView
 
@@ -63,7 +63,7 @@ class ProductReviewsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_pk'] = self.kwargs.get('pk')
-        context['form'] = self.form_class()  # Pass the form instance to the template
+        context['form'] = self.form_class()
         return context
 
 
@@ -73,7 +73,7 @@ class AddReviewToProduct(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         pk = self.kwargs.get('pk')
-        return reverse_lazy('product-reviews', kwargs={'pk': pk})
+        return reverse('product-reviews', kwargs={'pk': pk})
 
     def form_valid(self, form):
         product = get_object_or_404(Product, pk=self.kwargs['pk'])
@@ -86,8 +86,9 @@ class AddReviewToProduct(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Please enter review content and rating.')
-        return self.render_to_response(self.get_context_data(form=form))
+        messages.error(self.request, 'Please enter valid content and rating.')
+        pk = self.kwargs.get('pk')
+        return redirect(reverse('product-reviews', kwargs={'pk': pk}))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,4 +1,3 @@
-import decimal
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -6,6 +5,7 @@ from django.views.generic import ListView, View, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CartItem
 from ..products.models import Product
+from .forms import AddToCartForms
 
 
 class ShoppingCartView(LoginRequiredMixin, ListView):
@@ -25,17 +25,25 @@ class ShoppingCartView(LoginRequiredMixin, ListView):
 class AddToCartView(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
-        quantity = int(request.POST.get('quantity', 1))
-        weight = decimal.Decimal(request.POST.get('weight', 0.0))
+        form = AddToCartForms(request.POST)
 
-        cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
-                                                            defaults={'quantity': quantity})
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+            weight = form.cleaned_data['weight']
 
-        cart_item.quantity += quantity
-        cart_item.weight = weight if cart_item.weight is None else cart_item.weight + weight
-        cart_item.save()
+            try:
+                cart_item = CartItem.objects.get(user=request.user, product=product)
+                cart_item.quantity = quantity if cart_item.quantity is None else cart_item.quantity + quantity
+                cart_item.weight = weight if cart_item.weight is None else cart_item.weight + weight
+                cart_item.save()
+            except CartItem.DoesNotExist:
+                CartItem.objects.create(user=request.user, product=product, quantity=quantity, weight=weight)
 
-        return redirect(reverse('all-product-details', kwargs={'pk': pk}))
+            messages.success(request, 'Product added to cart successfully.')
+        else:
+            messages.error(request, 'Invalid form data. Please correct the errors and try again.')
+
+        return redirect('all-product-details', pk=pk)
 
 
 class DeleteFromCartView(LoginRequiredMixin, DeleteView):

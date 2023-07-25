@@ -5,9 +5,8 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['title', 'content', 'rating']
+        fields = ['content', 'rating']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'review-title-input'}),
             'content': forms.Textarea(attrs={'class': 'review-textarea', 'placeholder': 'Write your review...'}),
             'rating': forms.NumberInput(attrs={'class': 'review-rating-input', 'min': 1, 'max': 5}),
         }
