@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 from .forms import AddToCartForm
 
+
 class AllProductsListView(ListView):
     model = Product
     template_name = 'products/all_products.html'

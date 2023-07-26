@@ -23,7 +23,9 @@ class Product(models.Model):
                                     )
 
     image = models.ImageField(upload_to='product_pics/',
-                              validators=[validators.validate_file_size]
+                              validators=[validators.validate_file_size],
+                              blank=True,
+                              null=True
                               )
 
     has_weight = models.BooleanField(default=False)

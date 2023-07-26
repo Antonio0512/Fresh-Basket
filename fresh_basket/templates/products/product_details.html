@@ -1,20 +1,30 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="detail-product-card">
         <h2>{{ product.name }}</h2>
         <div class="detail-product-details">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+            {% else %}
+                <img src="{% static 'images/no image.jpg' %}" alt="{{ product.name }}"/>
+            {% endif %}
+
             <p class="detail-description">{{ product.description }}</p>
             <div class="detail-price-container">
                 <p><span>Price:</span> {{ product.price }} BGN</p>
+
                 {% if product.old_price %}
                     <p class="detail-old-price"><span>Old Price:</span> {{ product.old_price }} BGN</p>
                 {% endif %}
+
             </div>
             <form method="post" action="{% url 'add-to-cart' product.pk %}">
                 {% csrf_token %}
                 <button type="submit" class="detail-add-to-cart-button">Add to Cart</button>
+
                 {% if product.has_weight %}
                     {{ form.weight.label_tag }}
                     {{ form.weight }}
@@ -22,6 +32,7 @@
                     {{ form.quantity.label_tag }}
                     {{ form.quantity }}
                 {% endif %}
+
             </form>
             <div class="detail-favorite-reviews-btns">
                 <form action="{% url 'add-to-favourites' product.pk %}" method="POST">
@@ -31,6 +42,7 @@
                 <a href="{% url 'product-reviews' product.pk %}" class="detail-read-reviews-button">Read Reviews</a>
             </div>
             <div class="detail-messages-container">
+
                 {% for message in messages %}
                     {% if message.tags == 'error' %}
                         <p class="detail-error-message">{{ message }}</p>
@@ -38,6 +50,7 @@
                         <p class="detail-success-message">{{ message }}</p>
                     {% endif %}
                 {% endfor %}
+
             </div>
         </div>
     </div>

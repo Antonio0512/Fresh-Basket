@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="cart-container">
@@ -48,10 +49,15 @@
                 </tfoot>
             </table>
             <div class="cart-button-container">
-                <button class="cart-checkout-button">Proceed to Checkout</button>
+{#                <a href="{% url 'payment' %}" class="cart-checkout-button">Proceed to Checkout</a>#}
+                <a href="{% url "payment-home" %}" class="cart-checkout-button">Proceed to Checkout</a>
             </div>
         {% else %}
             <p class="cart-empty">Your cart is empty.</p>
         {% endif %}
     </div>
 {% endblock %}
+
+{#{% block javascript %}#}
+{#    <script src="{% static 'js/main.js' %}"></script>#}
+{#{% endblock %}#}
