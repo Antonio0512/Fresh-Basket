@@ -16,10 +16,7 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: toni1234
-      POSTGRES_USER: toni
-      POSTGRES_DB: fresh_basket_db
-      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file:
+      - ./fresh_basket/.env
     volumes:
       - ./postgresql:/var/lib/postgresql/data
