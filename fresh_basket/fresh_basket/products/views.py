@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from .models import Product
-from .forms import AddToCartForm
+from .forms import DetailsAddToCartForm
 
 
 class AllProductsListView(ListView):
@@ -28,5 +28,5 @@ class ProductDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = AddToCartForm()
+        context['form'] = DetailsAddToCartForm()
         return context

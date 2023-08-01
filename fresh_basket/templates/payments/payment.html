@@ -1,13 +1,27 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <h2>Buy for 5.00$</h2>
-    <form action="{% url "charge" %}" method="post">
-        {% csrf_token %}
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="{{ key }}"
-                data-description="A Django charge"
-                data-amount="500"
-                data-locale="auto">
-        </script>
-    </form>
+    <h2>Your current bill</h2>
+    <button id="checkout-button">Checkout</button>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe('{{ key }}');
+        const sessionId = "{{ CHECKOUT_SESSION_ID }}"; // Add this line for debugging
+        console.log("sessionId:", sessionId); // Add this line for debugging
+
+        const checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', () => {
+            // Use the session_id passed from the view
+            const sessionId = "{{ CHECKOUT_SESSION_ID }}";
+            stripe.redirectToCheckout({
+                sessionId: sessionId
+            }).then(function (result) {
+                if (result.error) {
+                    // Display error message to the user
+                    alert(result.error.message);
+                }
+            });
+        });
+    </script>
 {% endblock %}
