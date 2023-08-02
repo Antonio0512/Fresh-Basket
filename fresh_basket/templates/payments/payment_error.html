@@ -1,4 +1,9 @@
 {% extends 'base/base.html' %}
+
 {% block content %}
-    <h1>Error when trying to proceed the payment!</h1>
+    <div class="payment-error">
+        <h1>Error when trying to proceed with the payment!</h1>
+        <p>Sorry, an error occurred while processing your payment. Please try again later or contact support for assistance.</p>
+        <a href="{% url 'shopping-cart' %}" class="payment-btn payment-btn-primary payment-back-to-cart">Back to Cart</a>
+    </div>
 {% endblock %}

@@ -1,15 +1,18 @@
+<!-- payment_platform.html -->
 {% extends 'base/base.html' %}
+
 {% block content %}
-    <h2>Your current bill</h2>
-    <button id="checkout-button">Checkout</button>
+    <div class="before-payment-container">
+        <h1>Ready to make a payment?</h1>
+        <p>Click the button below to proceed to the payment platform.</p>
+        <button id="before-payment-checkout-button">Proceed to Payment</button>
+    </div>
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const stripe = Stripe('{{ key }}');
-        const sessionId = "{{ CHECKOUT_SESSION_ID }}"; // Add this line for debugging
-        console.log("sessionId:", sessionId); // Add this line for debugging
 
-        const checkoutButton = document.getElementById('checkout-button');
+        const checkoutButton = document.getElementById('before-payment-checkout-button');
 
         checkoutButton.addEventListener('click', () => {
             // Use the session_id passed from the view

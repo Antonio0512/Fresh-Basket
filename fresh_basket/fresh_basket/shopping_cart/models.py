@@ -11,7 +11,7 @@ class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1, null=True)
-    weight = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    weight = models.PositiveIntegerField(default=1, null=True)
 
     @property
     def has_weight(self):

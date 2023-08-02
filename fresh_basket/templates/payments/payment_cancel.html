@@ -1,4 +1,10 @@
 {% extends 'base/base.html' %}
+
 {% block content %}
-    <h1>The transaction is cancelled!</h1>
+    <div class="payment-cancelled">
+        <h1>The transaction is cancelled!</h1>
+        <p>Oops! It looks like the payment process was cancelled. Don't worry, you can still complete your purchase.</p>
+        <a href="{% url 'shopping-cart' %}" class="payment-btn payment-btn-primary payment-back-to-cart">Back to
+            Cart</a>
+    </div>
 {% endblock %}

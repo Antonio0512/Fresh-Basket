@@ -1,4 +1,9 @@
 {% extends 'base/base.html' %}
+
 {% block content %}
-    <h1>Payment pending ... please wait.</h1>
+    <div class="payment-pending">
+        <h1>Payment pending... please wait.</h1>
+        <p>Your payment is being processed. Please wait for a moment while we complete the transaction.</p>
+        <div class="payment-pending-spinner"></div>
+    </div>
 {% endblock %}

@@ -29,29 +29,25 @@ class AddToCartView(LoginRequiredMixin, View):
         if form.is_valid():
             quantity = form.cleaned_data.get('quantity')
             weight = form.cleaned_data.get('weight')
-            if quantity is not None and weight is None:
-                try:
-                    cart_item = CartItem.objects.get(user=request.user, product=product)
-                    cart_item.quantity = quantity if cart_item.quantity is None else cart_item.quantity + quantity
-                    # cart_item.weight = weight if cart_item.weight and cart_item.weight is None else cart_item.weight + weight
-                    cart_item.save()
-                    messages.success(request, 'Product added to cart successfully.')
-                except CartItem.DoesNotExist:
-                    CartItem.objects.create(user=request.user, product=product, quantity=quantity, weight=weight)
 
-            if weight is not None and quantity is None:
-                try:
-                    cart_item = CartItem.objects.get(user=request.user, product=product)
-                    # cart_item.quantity = quantity if cart_item.quantity is None else cart_item.quantity + quantity
-                    cart_item.weight = weight if cart_item.weight and cart_item.weight is None else cart_item.weight + weight
+            if quantity is not None:
+                cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
+                                                                    defaults={'quantity': quantity})
+                if not created:
+                    cart_item.quantity += quantity
                     cart_item.save()
-                    messages.success(request, 'Product added to cart successfully.')
-                except CartItem.DoesNotExist:
-                    CartItem.objects.create(user=request.user, product=product, quantity=quantity, weight=weight)
+                messages.success(request, 'Product added to cart successfully.')
 
-            if weight is None and quantity is None:
-                messages.error(request,
-                               'You try to enter empty qty or weight. Please enter a valid number')
+            elif weight is not None:
+                cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
+                                                                    defaults={'weight': weight})
+                if not created:
+                    cart_item.weight += weight
+                    cart_item.save()
+                messages.success(request, 'Product added to cart successfully.')
+
+            else:
+                messages.error(request, 'You try to enter empty qty or weight input. Please enter a valid number')
 
         else:
             messages.error(request, 'You entered invalid data, please try again')

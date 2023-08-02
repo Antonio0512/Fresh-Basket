@@ -20,16 +20,11 @@ class PaymentView(TemplateView):
 
         line_items = []
         for cart_item in cart_items:
-            if cart_item.has_weight:
-                line_items.append({
-                    'price': cart_item.product.stripe_price_id,
-                    'quantity': int(cart_item.weight),
-                })
-            else:
-                line_items.append({
-                    'price': cart_item.product.stripe_price_id,
-                    'quantity': cart_item.quantity,
-                })
+            quantity = cart_item.quantity if not cart_item.has_weight else cart_item.weight
+            line_items.append({
+                'price': cart_item.product.stripe_price_id,
+                'quantity': quantity,
+            })
 
         try:
             session = stripe.checkout.Session.create(
@@ -58,6 +53,11 @@ def charge(request):
         try:
             session = stripe.checkout.Session.retrieve(checkout_session_id)
             if session.payment_status == 'paid':
+                print("User:", request.user)  # Check if the user is authenticated and correct
+                if request.user.is_authenticated:
+                    user_cart_items = CartItem.objects.filter(user=request.user)
+                    print("Cart Items:", user_cart_items)  # Check if the queryset returns the correct items
+                    user_cart_items.delete()
                 return redirect('payment-success')
             elif session.payment_status == 'unpaid':
                 return redirect('payment-pending')
@@ -70,11 +70,21 @@ def charge(request):
             return render(request, 'payments/payment_error.html',
                           {'error_message': "An error occurred while processing the payment."})
 
+    print("User:", request.user)  # Check if the user is authenticated and correct
+    user_cart_items = CartItem.objects.filter(user=request.user)
+    print("Cart Items:", user_cart_items)  # Check if the queryset returns the correct items
+    user_cart_items.delete()
     return render(request, 'payments/payment_success.html')
 
 
 class ChargeSuccess(TemplateView):
     template_name = 'payments/payment_success.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            user_cart_item = CartItem.objects.get(user=request.user)
+            user_cart_item.delete()
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ChargeError(TemplateView):
