@@ -1,0 +1,28 @@
+SECRET_KEY=your_django_secret_key
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1 localhost
+
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=db_name
+DB_USER=db_user
+DB_PASSWORD=db_password
+DB_HOST=localhost
+DB_PORT=5432
+
+# FOR DOCKER COMPOSE
+POSTGRES_PASSWORD=db_password
+POSTGRES_USER=db_user
+POSTGRES_DB=db_name
+PGDATA=path_for_the_pg_data
+
+STATIC_ROOT=path_to_where_you_want_the_staticfiles
+
+STRIPE_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+STRIPE_SECRET_KEY=sk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your_email@gmail.com
+EMAIL_HOST_PASSWORD=your_email_password
