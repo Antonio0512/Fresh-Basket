@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.conf import settings
 from stripe import error
+from stripe.error import InvalidRequestError, AuthenticationError, APIConnectionError, APIError, RateLimitError, \
+    CardError, StripeError
 
 from fresh_basket.shopping_cart.models import CartItem
 
@@ -36,10 +38,28 @@ class PaymentView(TemplateView):
             )
             context['CHECKOUT_SESSION_ID'] = session.id
             context['error_message'] = None
-        except error.StripeError as e:
+
+        except InvalidRequestError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "Invalid request error occurred while processing the payment."
+        except AuthenticationError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "Authentication error occurred while processing the payment."
+        except APIConnectionError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "API connection error occurred while processing the payment."
+        except APIError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "API error occurred while processing the payment."
+        except RateLimitError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "Rate limit error occurred while processing the payment."
+        except CardError as e:
+            context['CHECKOUT_SESSION_ID'] = None
+            context['error_message'] = "Card error occurred while processing the payment."
+        except StripeError as e:
             context['CHECKOUT_SESSION_ID'] = None
             context['error_message'] = "An error occurred while processing the payment. Please try again later."
-
         return context
 
 

@@ -1,9 +1,11 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 from .models import Catalog
 
 
-class CatalogView(TemplateView):
+class CatalogView(ListView):
+    model = Catalog
     template_name = 'catalog/catalog.html'
+    context_object_name = 'catalogs'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

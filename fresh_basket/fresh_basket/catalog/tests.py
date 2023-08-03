@@ -8,13 +8,14 @@ class CatalogViewTest(TestCase):
         self.client = Client()
 
     def test_catalog_view(self):
-        catalog = Catalog.objects.create(name='All Products Catalog', description='Catalog Description')
+        Catalog.objects.create(name='All Products Catalog', description='Catalog Description')
         url = reverse('catalog')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'catalog/catalog.html')
-        self.assertEqual(response.context['all_catalogs'], catalog)
-        self.assertEqual(response.context['discounted_catalogs'], None)
+        self.assertIn('all_catalogs', response.context)
+        self.assertEqual(response.context['all_catalogs'].name, 'All Products Catalog')
+        self.assertIsNone(response.context['discounted_catalogs'])
 
     def test_catalog_view_no_catalogs(self):
         Catalog.objects.all().delete()

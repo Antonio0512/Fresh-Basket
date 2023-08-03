@@ -1,6 +1,8 @@
 import os
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
+from django.db.models import ProtectedError
 from django.shortcuts import render, redirect
 from django.views import generic as generic_views
 from django.contrib.auth import views as auth_views, login, logout, get_user_model
@@ -25,6 +27,10 @@ class UserRegisterView(generic_views.CreateView):
         username = form.cleaned_data['username']
         password = form.cleaned_data['password1']
         user = authenticate(username=username, password=password)
+
+        if user is None:
+            messages.error(self.request, 'Invalid username or password.')
+
         login(self.request, user)
 
         return response
@@ -75,10 +81,15 @@ class UserEditView(LoginRequiredMixin, generic_views.UpdateView):
         })
 
     def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user = self.request.user
-        instance.save()
-        form.save_m2m()
+        try:
+            instance = form.save(commit=False)
+            instance.user = self.request.user
+            instance.save()
+            form.save_m2m()
+        except IntegrityError:
+            messages.error(self.request, 'Error updating profile. Please check your input and try again.')
+            return redirect('profile-edit')
+
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -107,9 +118,17 @@ class UserDeleteView(LoginRequiredMixin, generic_views.DeleteView):
             profile_photo_path = obj.profile_picture.path
             obj.profile_picture.delete()
 
-        obj.delete()
+        try:
+            obj.delete()
+        except ProtectedError as e:
+            messages.error(self.request,
+                           'Error deleting profile. This user is associated with other objects and cannot be deleted.')
+            return redirect('profile-delete')
 
-        if profile_photo_path and os.path.isfile(profile_photo_path):
-            os.remove(profile_photo_path)
+        if profile_photo_path:
+            try:
+                os.remove(profile_photo_path)
+            except OSError as e:
+                messages.warning(self.request, 'Error deleting profile picture. Please contact the administrator.')
 
         return super().form_valid(form)

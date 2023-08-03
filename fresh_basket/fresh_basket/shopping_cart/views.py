@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, View, DeleteView
@@ -27,27 +28,31 @@ class AddToCartView(LoginRequiredMixin, View):
         product = get_object_or_404(Product, pk=pk)
         form = AddToCartForms(request.POST)
         if form.is_valid():
-            quantity = form.cleaned_data.get('quantity')
-            weight = form.cleaned_data.get('weight')
+            try:
+                quantity = form.cleaned_data.get('quantity')
+                weight = form.cleaned_data.get('weight')
 
-            if quantity is not None:
-                cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
-                                                                    defaults={'quantity': quantity})
-                if not created:
-                    cart_item.quantity += quantity
-                    cart_item.save()
-                messages.success(request, 'Product added to cart successfully.')
+                if quantity is not None:
+                    cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
+                                                                        defaults={'quantity': quantity})
+                    if not created:
+                        cart_item.quantity += quantity
+                        cart_item.save()
+                    messages.success(request, 'Product added to cart successfully.')
 
-            elif weight is not None:
-                cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
-                                                                    defaults={'weight': weight})
-                if not created:
-                    cart_item.weight += weight
-                    cart_item.save()
-                messages.success(request, 'Product added to cart successfully.')
+                elif weight is not None:
+                    cart_item, created = CartItem.objects.get_or_create(user=request.user, product=product,
+                                                                        defaults={'weight': weight})
+                    if not created:
+                        cart_item.weight += weight
+                        cart_item.save()
+                    messages.success(request, 'Product added to cart successfully.')
 
-            else:
-                messages.error(request, 'You try to enter empty qty or weight input. Please enter a valid number')
+                else:
+                    messages.error(request, 'You try to enter empty qty or weight input. Please enter a valid number')
+
+            except IntegrityError as e:
+                messages.error(request, 'An error occurred while adding the product to the cart.')
 
         else:
             messages.error(request, 'You entered invalid data, please try again')

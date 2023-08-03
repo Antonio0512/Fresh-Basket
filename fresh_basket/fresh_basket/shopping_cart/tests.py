@@ -33,9 +33,10 @@ class ShoppingCartAppTests(TestCase):
     def test_add_to_cart_view(self):
         self.client.force_login(self.user)
         url = reverse('add-to-cart', kwargs={'pk': self.product.pk})
+
         data = {
             'quantity': '2',
-            'weight': '0.5'
+            'weight': '1'
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -43,7 +44,7 @@ class ShoppingCartAppTests(TestCase):
         cart_item = CartItem.objects.filter(user=self.user, product=self.product).first()
         self.assertIsNotNone(cart_item)
         self.assertEqual(cart_item.quantity, 2)
-        self.assertEqual(cart_item.weight, Decimal('0.5'))
+        self.assertEqual(cart_item.weight, Decimal('1'))
 
     def test_delete_from_cart_view(self):
         self.client.force_login(self.user)

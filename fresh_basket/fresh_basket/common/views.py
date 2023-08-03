@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
@@ -12,22 +13,22 @@ from fresh_basket.promotions.models import Promotions
 
 
 def home(request):
-    promotions = Promotions.objects.all()
-
-    context = {
-        'promotions': promotions
-    }
-    return render(request, 'common/home.html', context)
+    return render(request, 'common/home.html')
 
 
 class AddToFavoritesView(LoginRequiredMixin, View):
     def post(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        if models.Favourite.objects.filter(user=request.user, product=product).exists():
-            messages.error(request, 'This product is already in your favorites.')
-        else:
-            models.Favourite.objects.create(user=request.user, product=product)
-            messages.success(request, 'Product added to favorites successfully.')
+        try:
+            product = get_object_or_404(Product, pk=pk)
+            if models.Favourite.objects.filter(user=request.user, product=product).exists():
+                messages.error(request, 'This product is already in your favorites.')
+
+            else:
+                models.Favourite.objects.create(user=request.user, product=product)
+                messages.success(request, 'Product added to favorites successfully.')
+        except ObjectDoesNotExist:
+            messages.error(request, 'Product not found.')
+
         return redirect('favourite-products-details', pk=pk)
 
 
@@ -76,14 +77,20 @@ class AddReviewToProduct(LoginRequiredMixin, FormView):
         return reverse('product-reviews', kwargs={'pk': pk})
 
     def form_valid(self, form):
-        product = get_object_or_404(Product, pk=self.kwargs['pk'])
-        review = form.save(commit=False)
-        review.product = product
-        review.user = self.request.user
-        review.save()
-
-        messages.success(self.request, 'Review added successfully.')
-        return super().form_valid(form)
+        try:
+            product = get_object_or_404(Product, pk=self.kwargs['pk'])
+            review = form.save(commit=False)
+            review.product = product
+            review.user = self.request.user
+            review.save()
+            messages.success(self.request, 'Review added successfully.')
+            return super().form_valid(form)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "Product not found")
+            return redirect(reverse('product-reviews', kwargs={'pk': self.kwargs['pk']}))
+        except ValidationError:
+            messages.error(self.request, 'Please enter valid content and rating.')
+            return redirect(reverse('product-reviews', kwargs={'pk': self.kwargs['pk']}))
 
     def form_invalid(self, form):
         messages.error(self.request, 'Please enter valid content and rating.')
