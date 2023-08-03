@@ -1,3 +1,4 @@
+@import 'body-nav-footer.css';
 @import 'home.css';
 @import "register.css";
 @import "logout.css";
@@ -11,3 +12,4 @@
 @import "favourites-list.css";
 @import "reviews-list.css";
 @import "payment.css";
+@import "promotion.css";

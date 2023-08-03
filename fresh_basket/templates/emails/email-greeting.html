@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Our Website!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .greeting-main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .greeting-logo {
+            text-align: center;
+        }
+
+        .greeting-logo img {
+            max-width: 150px;
+        }
+
+        .greeting-container {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 36px;
+        }
+
+        .greeting-message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .greeting-cta-button {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .greeting-cta-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="greeting-main-container">
+    <div class="greeting-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/The_Fresh_Market_logo.svg/1200px-The_Fresh_Market_logo.svg.png"
+             alt="Your Company Logo">
+    </div>
+    <div class="greeting-container">
+        Hello {{ user.username }},
+    </div>
+    <div class="greeting-message">
+        Welcome to our website! We are excited to have you join our community.
+    </div>
+    <div class="greeting-cta-button">
+        <a href="http://localhost:8000">Visit Our Website</a>
+    </div>
+</div>
+</body>
+</html>

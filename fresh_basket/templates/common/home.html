@@ -9,22 +9,29 @@
         </div>
     </section>
 
-    <section class="home-image-section">
-        <div class="home-container">
-            <img src="{% static 'images/food_images.png' %}" alt="Fresh Products">
+    <section class="home-card-section">
+        <div class="home-card-container">
+            <div class="home-card">
+                <a class="home-card-link" href="{% url 'promotions-all' %}">
+                    <img src="{% static 'images/promotions_image.jpg' %}" alt="Promotions Image">
+                    <h3>Promotions/Offers</h3>
+                    <p>Check out our latest promotions, discounts, and exclusive offers</p>
+                </a>
+            </div>
+            <div class="home-card">
+                <a class="home-card-link" href="{% url 'products-all' %}">
+                    <img src="{% static 'images/products_image.jpg' %}" alt="Products Image">
+                    <h3>All Products Catalog</h3>
+                    <p>Discover our wide range of fresh and organic products</p>
+                </a>
+            </div>
+            <div class="home-card">
+                <a class="home-card-link" href="{% url 'favourites-products' %}">
+                    <img src="{% static 'images/favorites_image.jpg' %}" alt="Favorites Image">
+                    <h3>Favorites</h3>
+                    <p>You can easily view and manage your favorite products</p>
+                </a>
+            </div>
         </div>
     </section>
-
-    <div class="home-promotions-section">
-        <h2 class="home-promotions-title">Promotions/Offers</h2>
-        <p class="home-promotions-description">Check out our latest promotions, discounts, and exclusive offers:</p>
-        <ul class="home-promotions-list">
-            {% for promotion in promotions %}
-                <li class="home-promotion-item">
-                    <h3 class="home-promotion-title">{{ promotion.title }}</h3>
-                    <p class="home-promotion-description">{{ promotion.description }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
 {% endblock %}

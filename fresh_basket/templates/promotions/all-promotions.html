@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="promotion-list-container">
+        <h1>Promotions and Offers</h1>
+        <ul class="promotion-list">
+            {% for promotion in promotions %}
+                <li class="promotion-item">
+                    <h2>{{ promotion.title }}</h2>
+                    <h4>{{ promotion.description }}</h4>
+                    <p>Start Date: {{ promotion.start_date }}</p>
+                    <p>End Date: {{ promotion.end_date }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
