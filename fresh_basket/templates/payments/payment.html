@@ -17,6 +17,7 @@
         checkoutButton.addEventListener('click', () => {
             // Use the session_id passed from the view
             const sessionId = "{{ CHECKOUT_SESSION_ID }}";
+            console.log(sessionId)
             stripe.redirectToCheckout({
                 sessionId: sessionId
             }).then(function (result) {

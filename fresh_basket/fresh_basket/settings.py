@@ -11,7 +11,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'development_secret_key')
 DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
+
 # CSRF_TRUSTED_ORIGINS = [f'http://{x}' for x in os.environ.get('ALLOWED_HOSTS', '').split(' ')]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,9 +26,12 @@ INSTALLED_APPS = [
     'fresh_basket.accounts.apps.AccountsConfig',
     'fresh_basket.products',
     'fresh_basket.catalog',
+    'fresh_basket.favorites',
+    'fresh_basket.reviews',
     'fresh_basket.shopping_cart',
     'fresh_basket.promotions',
-    'fresh_basket.payment'
+    'fresh_basket.payment',
+    'fresh_basket.user_history'
 ]
 
 MIDDLEWARE = [
@@ -114,4 +119,3 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-

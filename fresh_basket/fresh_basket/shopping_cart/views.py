@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CartItem
 from ..products.models import Product
 from .forms import AddToCartForms
+from ..user_history.views import record_user_cart
 
 
 class ShoppingCartView(LoginRequiredMixin, ListView):
@@ -38,6 +39,8 @@ class AddToCartView(LoginRequiredMixin, View):
                     if not created:
                         cart_item.quantity += quantity
                         cart_item.save()
+
+                    record_user_cart(request.user, product.pk, quantity)
                     messages.success(request, 'Product added to cart successfully.')
 
                 elif weight is not None:
@@ -46,6 +49,8 @@ class AddToCartView(LoginRequiredMixin, View):
                     if not created:
                         cart_item.weight += weight
                         cart_item.save()
+
+                    record_user_cart(request.user, product.pk, weight)
                     messages.success(request, 'Product added to cart successfully.')
 
                 else:

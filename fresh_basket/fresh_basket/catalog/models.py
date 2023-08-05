@@ -1,5 +1,5 @@
 from django.db import models
-from . import validators
+from fresh_basket.catalog import validators
 
 
 class Catalog(models.Model):

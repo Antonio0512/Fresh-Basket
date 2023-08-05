@@ -7,6 +7,7 @@ from stripe.error import InvalidRequestError, AuthenticationError, APIConnection
     CardError, StripeError
 
 from fresh_basket.shopping_cart.models import CartItem
+from fresh_basket.user_history.views import record_user_purchase
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -33,8 +34,8 @@ class PaymentView(TemplateView):
                 payment_method_types=['card'],
                 line_items=line_items,
                 mode='payment',
-                success_url=self.request.build_absolute_uri('/payment/charge-success/'),
-                cancel_url=self.request.build_absolute_uri('/payment/charge-cancel/')
+                success_url='http://127.0.0.1:8000/payment/charge-success',
+                cancel_url='http://127.0.0.1:8000/payment/charge-cancel'
             )
             context['CHECKOUT_SESSION_ID'] = session.id
             context['error_message'] = None
@@ -102,8 +103,13 @@ class ChargeSuccess(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            user_cart_item = CartItem.objects.get(user=request.user)
-            user_cart_item.delete()
+            user_cart_items = CartItem.objects.filter(user=request.user)
+
+            for cart_item in user_cart_items:
+                record_user_purchase(user=request.user, product=cart_item.product)
+
+            user_cart_items.delete()
+
         return super().dispatch(request, *args, **kwargs)
 
 

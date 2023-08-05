@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from .models import Product
 from .forms import DetailsAddToCartForm
+from ..user_history.views import record_user_view
 
 
 class AllProductsListView(ListView):
@@ -29,4 +30,10 @@ class ProductDetailsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = DetailsAddToCartForm()
+        user = self.request.user
+        product = self.get_object()
+
+        if user.is_authenticated:
+            record_user_view(user, product)
+
         return context
