@@ -34,4 +34,27 @@
             </div>
         </div>
     </section>
+    <section class="recommendations-section">
+        <div class="recommendations-container">
+            <h2 class="recommendations-heading">Recommended Products</h2>
+            {% if recommended_products %}
+                <ul class="recommendations-products-list">
+                    {% for recommendation in recommended_products %}
+                        <li>
+                            <a class="recommendations-link" href="{% url 'recommended-product-details' recommendation.product.pk %}">
+                                <div class="recommendations-product-card">
+                                    <img class="recommendations-product-image" src="{{ recommendation.product.image.url }}"
+                                         alt="{{ recommendation.product.name }}">
+                                    <h3 class="recommendations-product-name">{{ recommendation.product.name }}</h3>
+                                    <p class="recommendations-product-description">{{ recommendation.product.description }}</p>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-recommendations-products">No recommended products available.</p>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

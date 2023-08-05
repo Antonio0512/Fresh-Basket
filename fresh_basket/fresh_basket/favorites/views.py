@@ -28,7 +28,7 @@ class AddToFavoritesView(LoginRequiredMixin, View):
 
 class FavoriteListView(LoginRequiredMixin, ListView):
     model = models.Favourite
-    template_name = 'common/favourites-list.html'
+    template_name = 'common/../../templates/favorites/favourites-list.html'
     context_object_name = 'favourites'
 
     def get_queryset(self):
@@ -37,7 +37,7 @@ class FavoriteListView(LoginRequiredMixin, ListView):
 
 class RemoveFromFavouritesView(LoginRequiredMixin, DeleteView):
     model = models.Favourite
-    template_name = 'common/favourites-list.html'
+    template_name = 'common/../../templates/favorites/favourites-list.html'
     success_url = reverse_lazy('favourites-products')
 
     def form_valid(self, form):

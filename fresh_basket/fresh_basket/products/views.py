@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from .models import Product
 from .forms import DetailsAddToCartForm
+from ..recommendations.views import generate_recommendations
 from ..user_history.views import record_user_view
 
 
@@ -35,5 +36,7 @@ class ProductDetailsView(DetailView):
 
         if user.is_authenticated:
             record_user_view(user, product)
+
+        generate_recommendations(user)
 
         return context

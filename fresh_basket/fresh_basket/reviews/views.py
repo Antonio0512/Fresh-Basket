@@ -12,7 +12,7 @@ from fresh_basket.reviews.forms import ReviewForm
 
 class ProductReviewsListView(ListView):
     model = models.Review
-    template_name = 'common/reviews-list.html'
+    template_name = 'reviews/reviews-list.html'
     context_object_name = 'reviews'
     form_class = ReviewForm
 
@@ -28,7 +28,7 @@ class ProductReviewsListView(ListView):
 
 
 class AddReviewToProduct(LoginRequiredMixin, FormView):
-    template_name = 'common/reviews-list.html'
+    template_name = 'common/../../templates/reviews/reviews-list.html'
     form_class = ReviewForm
 
     def get_success_url(self):
