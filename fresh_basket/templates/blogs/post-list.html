@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="post-container">
+        <h1 class="post-title">Blogs</h1>
+        <ul class="post-list">
+            {% if posts %}
+                {% for post in posts %}
+                    <li class="post-item">
+                        <a class="post-link" href="{% url 'post-details' post.pk %}">
+                            <div class="post-content">
+                                {% if post.post_image %}
+                                    <img src="/media/{{ post.post_image }}" alt="{{ post.title }}"/>
+                                {% else %}
+                                    <img src="{% static "images/no image.jpg" %}" alt="No image"/>
+                                {% endif %}
+                                <div class="post-text">
+                                    <h2>{{ post.title }}</h2>
+                                    <p>{{ post.content }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2 class="post-no-posts">No posts available at the moment.</h2>
+        {% endif %}
+
+        <div class="post-list-add-section">
+            <h2 class="post-list-add-title">Click here to add your own post!</h2>
+            <a class="post-list-add-link" href="{% url 'post-add-page' %}">Add post</a>
+        </div>
+    </div>
+{% endblock %}

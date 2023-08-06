@@ -15,6 +15,7 @@ urlpatterns = [
     path('shopping-cart/', include('fresh_basket.shopping_cart.urls')),
     path('payment/', include('fresh_basket.payment.urls')),
     path('user_history/', include('fresh_basket.user_history.urls')),
+    path('blog/', include('fresh_basket.blog.urls'))
 ]
 
 if settings.DEBUG:

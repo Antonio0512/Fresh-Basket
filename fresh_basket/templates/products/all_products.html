@@ -3,6 +3,13 @@
 {% block content %}
     <div class="catalog-product-card">
         <h2>All Products</h2>
+        <form class="catalog-search-form" method="GET" action="{% url 'products-discount' %}">
+            <label class="catalog-search-label">
+                <input class="catalog-search-input" type="text" name="q" placeholder="Search products">
+            </label>
+            <button class="catalog-search-button" type="submit">Search</button>
+        </form>
+
         <div class="catalog-product-container">
             {% for product in products %}
                 <div class="catalog-product-item">

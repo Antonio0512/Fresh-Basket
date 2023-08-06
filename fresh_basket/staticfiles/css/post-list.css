@@ -1,0 +1,138 @@
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.post-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-item {
+    margin-bottom: 30px;
+}
+
+.post-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-content {
+    display: flex;
+}
+
+.post-content img {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.post-text {
+    flex: 1;
+}
+
+.post-text h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-text p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.post-no-posts {
+    font-size: 18px;
+    font-style: italic;
+    color: #555;
+    margin-top: 30px;
+}
+
+.post-list-add-section {
+    margin: 50px auto;
+}
+
+.post-list-add-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-list-add-link {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.post-list-add-link:hover {
+    background-color: #0056b3;
+}
+
+
+.post-add-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.post-add-page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.post-add-page-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-add-page-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-add-title-input,
+.post-add-content-input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.post-add-content-input {
+    resize: vertical;
+    overflow: auto;
+}
+
+.post-add-image-input {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.post-add-page-button {
+    max-width: 7rem;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-add-page-button:hover {
+    background-color: #0056b3;
+}

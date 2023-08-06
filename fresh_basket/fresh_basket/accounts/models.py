@@ -29,8 +29,7 @@ class MarketUser(AbstractUser):
     )
 
     profile_picture = models.ImageField(
-        upload_to='profile_pics/',
-        validators=[validators.validate_file_size]
+        upload_to='profile_pics/'
     )
 
     gender = models.CharField(

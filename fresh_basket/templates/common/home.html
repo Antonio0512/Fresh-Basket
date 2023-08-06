@@ -26,10 +26,10 @@
                 </a>
             </div>
             <div class="home-card">
-                <a class="home-card-link" href="{% url 'favourites-products' %}">
-                    <img src="{% static 'images/favorites_image.jpg' %}" alt="Favorites Image">
-                    <h3>Favorites</h3>
-                    <p>You can easily view and manage your favorite products</p>
+                <a class="home-card-link" href="{% url 'posts-all' %}">
+                    <img src="{% static 'images/blog_pic.jpg' %}" alt="Post image">
+                    <h3>Posts</h3>
+                    <p>Discover recipes, product information, and more from users just like you.</p>
                 </a>
             </div>
         </div>
@@ -41,9 +41,11 @@
                 <ul class="recommendations-products-list">
                     {% for recommendation in recommended_products %}
                         <li>
-                            <a class="recommendations-link" href="{% url 'recommended-product-details' recommendation.product.pk %}">
+                            <a class="recommendations-link"
+                               href="{% url 'recommended-product-details' recommendation.product.pk %}">
                                 <div class="recommendations-product-card">
-                                    <img class="recommendations-product-image" src="{{ recommendation.product.image.url }}"
+                                    <img class="recommendations-product-image"
+                                         src="{{ recommendation.product.image.url }}"
                                          alt="{{ recommendation.product.name }}">
                                     <h3 class="recommendations-product-name">{{ recommendation.product.name }}</h3>
                                     <p class="recommendations-product-description">{{ recommendation.product.description }}</p>

@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="post-details-container">
+        <h1 class="post-details-title">{{ post.title }}</h1>
+        {% if post.post_image %}
+            <img class="post-details-img" src="/media/{{ post.post_image }}" alt="{{ post.title }}"/>
+        {% else %}
+            <img class="post-details-img" src="{% static "images/no image.jpg" %}" alt="No image"/>
+        {% endif %}
+        <p class="post-details-content">{{ post.content }}</p>
+        <p class="post-details-pub-date">Published on {{ post.pub_date }}</p>
+        <p class="post-details-author">Author: {{ post.author }}</p>
+    </div>
+{% endblock %}

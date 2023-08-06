@@ -1,5 +1,4 @@
 from django.db import models
-from fresh_basket.catalog import validators
 
 
 class Catalog(models.Model):
@@ -13,7 +12,6 @@ class Catalog(models.Model):
     )
 
     catalog_image = models.ImageField(upload_to='catalog_pics',
-                                      validators=[validators.validate_file_size],
                                       null=True,
                                       blank=True
                                       )

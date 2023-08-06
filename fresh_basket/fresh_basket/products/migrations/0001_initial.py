@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, validators=[fresh_basket.products.validators.validate_name_length])),
                 ('description', models.TextField(max_length=300)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=8, validators=[fresh_basket.products.validators.validate_positive_price])),
-                ('image', models.ImageField(upload_to='product_pics/', validators=[fresh_basket.products.validators.validate_file_size])),
+                ('image', models.ImageField(upload_to='product_pics/')),
             ],
         ),
     ]
