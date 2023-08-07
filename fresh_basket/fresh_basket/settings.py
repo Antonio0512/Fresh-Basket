@@ -22,6 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'fresh_basket.common',
     'fresh_basket.accounts.apps.AccountsConfig',
     'fresh_basket.products',
@@ -77,6 +82,11 @@ DATABASES = {
         "PORT": os.environ.get('DB_PORT', '5432'),
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 AUTH_USER_MODEL = 'accounts.MarketUser'
 

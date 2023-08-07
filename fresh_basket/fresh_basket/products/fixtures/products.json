@@ -1,0 +1,24 @@
+[
+  {
+    "model": "products.Product",
+    "fields": {
+      "name": "Premium Arabica Coffee",
+      "description": "Description: A rich and aromatic blend of freshly roasted Arabica coffee beans sourced from high-altitude plantations. Experience a smooth, velvety cup with notes of caramel and dark chocolate.",
+      "price": "12.99",
+      "old_price": "14.99",
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": 2
+    }
+  },
+  {
+    "model": "products.Product",
+    "fields": {
+      "name": "Organic Quinoa Grain",
+      "description": "Description: Nutritious and versatile, our organic quinoa is a superfood packed with protein, fiber, and essential amino acids. Elevate your meals with this gluten-free and easy-to-cook grain.",
+      "price": "4.49",
+      "has_weight": false,
+      "catalog": 1
+    }
+  }
+]

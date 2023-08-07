@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from . import forms
-from ..promotions.models import Promotions
+from ..promotions.models import Promotion
 
 User = get_user_model()
 
@@ -66,7 +66,7 @@ class UserDetailsView(LoginRequiredMixin, generic_views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['promotions'] = Promotions.objects.all()
+        context['promotions'] = Promotion.objects.all()
         return context
 
 
