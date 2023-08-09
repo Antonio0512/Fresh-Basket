@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sunday Discount Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .discount-email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .discount-logo {
+            text-align: center;
+        }
+
+        .discount-logo img {
+            max-width: 150px;
+        }
+
+        .discount-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        .discount-message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .discount-cta-button {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .discount-cta-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="discount-email-container">
+    <div class="discount-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/The_Fresh_Market_logo.svg/1200px-The_Fresh_Market_logo.svg.png"
+             alt="Company Logo">
+    </div>
+    <div class="discount-title">
+        Hello {{ user.username }},
+    </div>
+    <div class="discount-message">
+        Don't miss out on our exclusive Sunday discounts! Visit our discount catalog and save on your favorite items.
+    </div>
+    <div class="discount-cta-button">
+        <a href="{% url 'products-discount' %}">Browse the Discount Catalog</a>
+    </div>
+</div>
+</body>
+</html>

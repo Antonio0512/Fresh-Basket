@@ -4,7 +4,7 @@ from .models import Product
 from .forms import DetailsAddToCartForm, ProductSearchForm
 from ..recommendations.views import generate_recommendations
 from ..user_history.views import record_user_view
-
+from .tasks import send_sunday_email
 
 class AllProductsListView(ListView):
     model = Product
@@ -41,7 +41,6 @@ class DiscountProductsListView(ListView):
             )
 
         return queryset
-
 
 class ProductDetailsView(DetailView):
     model = Product

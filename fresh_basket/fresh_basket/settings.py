@@ -1,6 +1,8 @@
 import os
-import dotenv
 from pathlib import Path
+
+import dotenv
+from celery.schedules import crontab
 
 dotenv.load_dotenv()
 
@@ -38,7 +40,9 @@ INSTALLED_APPS = [
     'fresh_basket.payment',
     'fresh_basket.user_history',
     'fresh_basket.recommendations',
-    'fresh_basket.blog'
+    'fresh_basket.blog',
+
+    'celery',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +135,16 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_BEAT_SCHEDULE = {
+    'send-sunday-email': {
+        'task': 'fresh_basket.products.tasks.send_sunday_email',
+        'schedule': crontab(day_of_week='6', hour='11', minute='0'),
+    },
+}
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_TIMEZONE = 'Europe/Sofia'
