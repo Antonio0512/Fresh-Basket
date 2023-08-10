@@ -70,3 +70,53 @@
     width: 250px;
     height: 250px;
 }
+
+
+@media (max-width: 768px) {
+    .home-container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .home-card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home-card {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .recommendations-heading {
+        margin-top: 20px;
+    }
+
+    .recommendations-products-list {
+        padding: 0;
+        list-style: none;
+    }
+
+    .recommendations-product-card {
+        text-align: center;
+    }
+
+    .nav-links ul {
+        flex-direction: row;
+    }
+
+    .nav-links ul li {
+        margin-left: 8px;
+        font-size: 13px;
+    }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 4px 0;
+        margin-top: auto;
+    }
+}

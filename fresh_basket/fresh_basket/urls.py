@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from fresh_basket.common import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,7 +16,8 @@ urlpatterns = [
     path('shopping-cart/', include('fresh_basket.shopping_cart.urls')),
     path('payment/', include('fresh_basket.payment.urls')),
     path('user_history/', include('fresh_basket.user_history.urls')),
-    path('blog/', include('fresh_basket.blog.urls'))
+    path('blog/', include('fresh_basket.blog.urls')),
+    path('<path:unknown_path>/', views.Custom404View.as_view(), name="error_404")
 ]
 
 if settings.DEBUG:

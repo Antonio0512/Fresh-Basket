@@ -14,3 +14,7 @@ class HomeView(TemplateView):
             context['recommended_products'] = recommended_products
 
         return context
+
+
+class Custom404View(TemplateView):
+    template_name = 'error/page-not-found.html'
