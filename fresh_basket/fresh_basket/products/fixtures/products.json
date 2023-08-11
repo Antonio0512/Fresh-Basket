@@ -1,24 +1,282 @@
 [
   {
     "model": "products.Product",
+    "pk": 1,
     "fields": {
-      "name": "Premium Arabica Coffee",
-      "description": "Description: A rich and aromatic blend of freshly roasted Arabica coffee beans sourced from high-altitude plantations. Experience a smooth, velvety cup with notes of caramel and dark chocolate.",
-      "price": "12.99",
-      "old_price": "14.99",
-      "has_weight": false,
+      "name": "Organic Apples",
+      "description": "Fresh and delicious organic apples.",
+      "price": "2.99",
+      "old_price": "3.59",
+      "has_weight": true,
       "catalog": 1,
-      "discount_catalog": 2
+      "discount_catalog": 2,
+      "stripe_price_id": ""
     }
   },
   {
     "model": "products.Product",
+    "pk": 2,
     "fields": {
-      "name": "Organic Quinoa Grain",
-      "description": "Description: Nutritious and versatile, our organic quinoa is a superfood packed with protein, fiber, and essential amino acids. Elevate your meals with this gluten-free and easy-to-cook grain.",
-      "price": "4.49",
+      "name": "Premium Coffee Beans",
+      "description": "High-quality premium coffee beans for coffee enthusiasts.",
+      "price": "12.99",
+      "old_price": "15.99",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 3,
+    "fields": {
+      "name": "Organic Avocado",
+      "description": "Creamy and nutritious organic avocados.",
+      "price": "1.49",
+      "old_price": null,
       "has_weight": false,
-      "catalog": 1
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 4,
+    "fields": {
+      "name": "Gourmet Chocolate Bar",
+      "description": "Indulge in the rich flavor of our gourmet chocolate bar.",
+      "price": "4.99",
+      "old_price": null,
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 5,
+    "fields": {
+      "name": "Fresh Strawberries",
+      "description": "Sweet and juicy fresh strawberries for a healthy snack.",
+      "price": "3.49",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 6,
+    "fields": {
+      "name": "Organic Spinach",
+      "description": "Nutrient-rich organic spinach for salads and smoothies.",
+      "price": "2.25",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 7,
+    "fields": {
+      "name": "Grass-Fed Beef",
+      "description": "Premium grass-fed beef for your favorite recipes.",
+      "price": "9.99",
+      "old_price": "12.99",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 8,
+    "fields": {
+      "name": "Whole Grain Bread",
+      "description": "Wholesome whole grain bread for a healthy diet.",
+      "price": "3.75",
+      "old_price": null,
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 9,
+    "fields": {
+      "name": "Fresh Salmon Fillet",
+      "description": "Delicious fresh salmon fillet for seafood lovers.",
+      "price": "8.99",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 10,
+    "fields": {
+      "name": "Organic Blueberries",
+      "description": "Sweet and nutritious organic blueberries.",
+      "price": "4.25",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 11,
+    "fields": {
+      "name": "Organic Bananas",
+      "description": "Naturally grown organic bananas.",
+      "price": "1.99",
+      "old_price": "2.69",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 12,
+    "fields": {
+      "name": "Artisanal Cheese",
+      "description": "Handcrafted artisanal cheese for cheese lovers.",
+      "price": "7.99",
+      "old_price": "9.99",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 13,
+    "fields": {
+      "name": "Fresh Mango",
+      "description": "Juicy and refreshing fresh mango.",
+      "price": "2.49",
+      "old_price": null,
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 14,
+    "fields": {
+      "name": "Dark Chocolate Truffles",
+      "description": "Indulge in the decadent taste of dark chocolate truffles.",
+      "price": "6.49",
+      "old_price": null,
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 15,
+    "fields": {
+      "name": "Fresh Peaches",
+      "description": "Sweet and fragrant fresh peaches.",
+      "price": "3.29",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 16,
+    "fields": {
+      "name": "Organic Kale",
+      "description": "Nutrient-packed organic kale for salads and smoothies.",
+      "price": "2.75",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 17,
+    "fields": {
+      "name": "Free-Range Eggs",
+      "description": "Farm-fresh free-range eggs for your favorite recipes.",
+      "price": "4.99",
+      "old_price": "6.49",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 18,
+    "fields": {
+      "name": "Multigrain Cereal",
+      "description": "Wholesome multigrain cereal for a nutritious breakfast.",
+      "price": "3.25",
+      "old_price": null,
+      "has_weight": false,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 19,
+    "fields": {
+      "name": "Fresh Tuna Steak",
+      "description": "Delicious fresh tuna steak for seafood enthusiasts.",
+      "price": "10.99",
+      "old_price": "13.99",
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": 2,
+      "stripe_price_id": ""
+    }
+  },
+  {
+    "model": "products.Product",
+    "pk": 20,
+    "fields": {
+      "name": "Sweet Pineapple",
+      "description": "Succulent and sweet pineapple slices.",
+      "price": "2.99",
+      "old_price": null,
+      "has_weight": true,
+      "catalog": 1,
+      "discount_catalog": null,
+      "stripe_price_id": ""
     }
   }
 ]
